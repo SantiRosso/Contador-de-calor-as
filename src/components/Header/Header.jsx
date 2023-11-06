@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
         borderRadius: 24
     },
     arrowContainer: {
-
+        marginLeft: -12
     }
 })
 
