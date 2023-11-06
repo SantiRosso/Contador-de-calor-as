@@ -1,12 +1,14 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 //components
 import Header from '../../components/Header';
+import CaloriesModule from '../../components/CaloriesModule';
 
 const Home = () => {
     return(
         <View style={styles.container}>
             <Header />
+            <CaloriesModule />
         </View>
     )
 }
