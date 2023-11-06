@@ -1,10 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+//components
+import Header from '../../components/Header';
 
 const AddFood = () => {
     return(
         <View>
-            <Text>AddFood</Text>
+            <Header />
         </View>
     )
 }
