@@ -1,6 +1,7 @@
 import React, {FC} from "react";
 import { Modal, View, StyleSheet } from "react-native";
-import { Button, Icon } from "@rneui/themed";
+import { Button, Icon, Input, Text } from "@rneui/themed";
+import FormAddFoodModal from "../FormAddFoodModal";
 
 type AddFoodModalProps = {
     onClose: () => void;
@@ -12,7 +13,10 @@ const AddFoodModal: FC<AddFoodModalProps> = ({onClose, visible}) => {
         <Modal visible={visible} onRequestClose={onClose} transparent animationType='slide'>
             <View style={styles.container}>
                 <View style={styles.content}>
-                    <Button icon={<Icon name='close'/>} onPress={onClose} type='clear'/>
+                    <View style={styles.closeContainer}>
+                        <Button icon={<Icon name='close' size={28}/>} onPress={onClose} type='clear'/>
+                    </View>
+                    <FormAddFoodModal/>
                 </View>
             </View>
         </Modal>
@@ -39,6 +43,9 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 5,
+    },
+    closeContainer: {
+        alignItems: 'flex-end'
     }
 })
 
