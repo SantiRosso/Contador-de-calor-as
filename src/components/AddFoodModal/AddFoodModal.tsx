@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, useState, useEffect} from "react";
 import { Modal, View, StyleSheet } from "react-native";
 import { Button, Icon, Input, Text } from "@rneui/themed";
 import FormAddFoodModal from "../FormAddFoodModal";
@@ -9,6 +9,17 @@ type AddFoodModalProps = {
 }
 
 const AddFoodModal: FC<AddFoodModalProps> = ({onClose, visible}) => {
+    
+    const [calories, setCalories] = useState<string>('');
+    const [name, setName] = useState<string>('');
+    const [portion, setPortion] = useState<string>('');
+
+    useEffect(() => {
+        setCalories('');
+        setName('');
+        setPortion('');
+    }, [visible])
+
     return(
         <Modal visible={visible} onRequestClose={onClose} transparent animationType='slide'>
             <View style={styles.container}>
@@ -16,11 +27,11 @@ const AddFoodModal: FC<AddFoodModalProps> = ({onClose, visible}) => {
                     <View style={styles.closeContainer}>
                         <Button icon={<Icon name='close' size={28}/>} onPress={onClose} type='clear'/>
                     </View>
-                    <FormAddFoodModal text={'KCAL'}/>
-                    <FormAddFoodModal text={'name'}/>
-                    <FormAddFoodModal text={'portion'}/>
+                    <FormAddFoodModal text={'CAL'} inputValue={calories} setValue={setCalories}/>
+                    <FormAddFoodModal text={'name'} inputValue={name} setValue={setName}/>
+                    <FormAddFoodModal text={'portion'} inputValue={portion} setValue={setPortion}/>
                     <View style={styles.buttonContainer}>
-                        <Button title='Add' icon={ <Icon name='add' color='#fff' />} radius='lg' color='#4ecb71' />
+                        <Button title='Add' icon={ <Icon name='add' color='#fff' />} radius='lg' color='#4ecb71' disabled={calories.trim() === '' || name.trim() === '' || portion.trim() === ''}/>
                     </View>
                 </View>
             </View>
