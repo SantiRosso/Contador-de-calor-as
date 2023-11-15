@@ -16,7 +16,12 @@ const AddFoodModal: FC<AddFoodModalProps> = ({onClose, visible}) => {
                     <View style={styles.closeContainer}>
                         <Button icon={<Icon name='close' size={28}/>} onPress={onClose} type='clear'/>
                     </View>
-                    <FormAddFoodModal/>
+                    <FormAddFoodModal text={'KCAL'}/>
+                    <FormAddFoodModal text={'name'}/>
+                    <FormAddFoodModal text={'portion'}/>
+                    <View style={styles.buttonContainer}>
+                        <Button title='Add' icon={ <Icon name='add' color='#fff' />} radius='lg' color='#4ecb71' />
+                    </View>
                 </View>
             </View>
         </Modal>
@@ -45,6 +50,9 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     closeContainer: {
+        alignItems: 'flex-end'
+    },
+    buttonContainer: {
         alignItems: 'flex-end'
     }
 })

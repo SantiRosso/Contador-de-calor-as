@@ -1,16 +1,19 @@
-import React from 'react';
+import React, {FC} from 'react';
 import { View, StyleSheet } from "react-native";
 import { Input, Text } from "@rneui/themed";
 
+type FormAddFoodModalProps = {
+    text: string;
+}
 
-const FormAddFoodModal = () => {
+const FormAddFoodModal: FC<FormAddFoodModalProps> = ({text}) => {
     return(
         <View style={styles.formItem}>
             <View style={styles.inputContainer}>
                 <Input/>
             </View>
             <View style={styles.legendContainer}>
-                <Text style={styles.legend}>KCAL</Text>
+                <Text style={styles.legend}>{text}</Text>
             </View>
         </View>
     )
