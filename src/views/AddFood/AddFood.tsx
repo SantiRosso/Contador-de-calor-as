@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
 //components
 import Header from '../../components/Header';
 import { Button, Icon, Input } from '@rneui/themed';
@@ -9,7 +9,10 @@ const AddFood = () => {
 
     const [visible, setVisible] = useState<boolean>(false)
 
-    const handleModalClose = () => {
+    const handleModalClose = (showUpdate?: boolean) => {
+        if(showUpdate){
+            Alert.alert('Comida guardad exitosamente');
+        }
         setVisible(false);
     }
 
