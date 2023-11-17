@@ -1,6 +1,6 @@
 import React, {FC, useState, useEffect} from "react";
 import { Modal, View, StyleSheet } from "react-native";
-import { Button, Icon, Input, Text } from "@rneui/themed";
+import { Button, Icon } from "@rneui/themed";
 import FormAddFoodModal from "../FormAddFoodModal";
 
 type AddFoodModalProps = {
@@ -20,6 +20,11 @@ const AddFoodModal: FC<AddFoodModalProps> = ({onClose, visible}) => {
         setPortion('');
     }, [visible])
 
+    const handleAddPress = () => {
+
+        onClose();
+    }
+
     return(
         <Modal visible={visible} onRequestClose={onClose} transparent animationType='slide'>
             <View style={styles.container}>
@@ -31,7 +36,7 @@ const AddFoodModal: FC<AddFoodModalProps> = ({onClose, visible}) => {
                     <FormAddFoodModal text={'name'} inputValue={name} setValue={setName}/>
                     <FormAddFoodModal text={'portion'} inputValue={portion} setValue={setPortion}/>
                     <View style={styles.buttonContainer}>
-                        <Button title='Add' icon={ <Icon name='add' color='#fff' />} radius='lg' color='#4ecb71' disabled={calories.trim() === '' || name.trim() === '' || portion.trim() === ''}/>
+                        <Button title='Add' icon={ <Icon name='add' color='#fff' />} radius='lg' color='#4ecb71' disabled={calories.trim() === '' || name.trim() === '' || portion.trim() === ''} onPress={handleAddPress}/>
                     </View>
                 </View>
             </View>

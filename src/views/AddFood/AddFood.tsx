@@ -39,7 +39,9 @@ const AddFood = () => {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 12
+        padding: 12,
+        backgroundColor: '#fff',
+        flex: 1
     },
     addFoodContainer: {
         flexDirection: 'row',
