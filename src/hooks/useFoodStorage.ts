@@ -30,6 +30,19 @@ const useFoodStorage = () => {
     }
   };
 
+  const getInfoToStorage = async (storageKey: string) => {
+    try {
+      const foods = await AsyncStorage.getItem(storageKey);
+
+      if (foods !== null) {
+        const parsedFoods = JSON.parse(foods);
+        return Promise.resolve(parsedFoods);
+      }
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  };
+
   const handleSaveFood = async ({ calories, name, portion }: Meal) => {
     try {
       const result = await saveInfoToStorage(MY_FOOD_KEY, {
@@ -46,12 +59,9 @@ const useFoodStorage = () => {
 
   const handleGetFood = async () => {
     try {
-      const foods = await AsyncStorage.getItem(MY_FOOD_KEY);
+      const result = await getInfoToStorage(MY_FOOD_KEY);
 
-      if (foods !== null) {
-        const parsedFoods = JSON.parse(foods);
-        return Promise.resolve(parsedFoods);
-      }
+      return Promise.resolve(result);
     } catch (error) {
       return Promise.reject(error);
     }
@@ -72,10 +82,21 @@ const useFoodStorage = () => {
     }
   };
 
+  const handleGetTodayFood = async () => {
+    try {
+      const result = await getInfoToStorage(MY_TODAY_FOOD_KEY);
+
+      return Promise.resolve(result);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  };
+
   return {
     onSaveFood: handleSaveFood,
     onSaveTodayFood: handleSaveTodayFood,
     onGetFood: handleGetFood,
+    onGetTodayFood: handleGetTodayFood,
   };
 };
 
