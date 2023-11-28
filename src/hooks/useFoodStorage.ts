@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { isToday } from "date-fns";
 //types
 import { Meal } from "../types";
 
@@ -35,7 +36,7 @@ const useFoodStorage = () => {
       const foods = await AsyncStorage.getItem(storageKey);
 
       if (foods !== null) {
-        const parsedFoods = JSON.parse(foods);
+        const parsedFoods = JSON.parse(foods) as Meal[];
         return Promise.resolve(parsedFoods);
       }
     } catch (error) {
@@ -86,7 +87,9 @@ const useFoodStorage = () => {
     try {
       const result = await getInfoToStorage(MY_TODAY_FOOD_KEY);
 
-      return Promise.resolve(result);
+      return Promise.resolve(
+        result?.filter((meal) => meal.date && isToday(new Date(meal.date)))
+      );
     } catch (error) {
       return Promise.reject(error);
     }

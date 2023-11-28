@@ -4,6 +4,7 @@ import { useFocusEffect } from '@react-navigation/native';
 //components
 import Header from '../../components/Header';
 import CaloriesModule from '../../components/CaloriesModule';
+import TodayCalories from '../../components/TodayCalories';
 //hooks
 import useFoodStorage from '../../hooks/useFoodStorage';
 //types
@@ -17,7 +18,7 @@ const Home = () => {
     const loadTodayFood = useCallback(async () => {
         try {
             const todayFoodResponse = await onGetTodayFood();
-            setTodayFood(todayFoodResponse);
+            // setTodayFood(todayFoodResponse);
         } catch (error) {
             setTodayFood([]);
             console.error(error);
@@ -32,6 +33,7 @@ const Home = () => {
         <View style={styles.container}>
             <Header />
             <CaloriesModule />
+            <TodayCalories /> 
         </View>
     )
 };
