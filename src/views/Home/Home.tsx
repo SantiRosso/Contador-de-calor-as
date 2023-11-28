@@ -18,7 +18,7 @@ const Home = () => {
     const loadTodayFood = useCallback(async () => {
         try {
             const todayFoodResponse = await onGetTodayFood();
-            // setTodayFood(todayFoodResponse);
+            setTodayFood(todayFoodResponse);
         } catch (error) {
             setTodayFood([]);
             console.error(error);

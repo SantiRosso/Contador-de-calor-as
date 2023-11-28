@@ -87,9 +87,11 @@ const useFoodStorage = () => {
     try {
       const result = await getInfoToStorage(MY_TODAY_FOOD_KEY);
 
-      return Promise.resolve(
-        result?.filter((meal) => meal.date && isToday(new Date(meal.date)))
-      );
+      const response = result
+        ? result.filter((meal) => meal.date && isToday(new Date(meal.date)))
+        : [];
+
+      return Promise.resolve(response);
     } catch (error) {
       return Promise.reject(error);
     }
