@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import CircularProgress from 'react-native-circular-progress-indicator';
 
-const TodayCalories = ({ total, consumed, remaining }) => {
+type todayCaloriesProps = {
+    total: number | string;
+    consumed: number | string;
+    remaining: number | string;
+    percentage: number;
+}
+
+const TodayCalories: FC<todayCaloriesProps> = ({ total = 0, consumed = 0, remaining = 0, percentage = 0 }) => {
     return(
         <View style={styles.container}>
             <View style={styles.leftContainer}>
-                <CircularProgress value={10} valueSuffix='%'/>
+                <CircularProgress value={percentage} valueSuffix='%'/>
             </View>
             <View style={styles.rightContainer}>
                 <Text style={styles.today}>Today</Text>
@@ -29,25 +36,30 @@ const TodayCalories = ({ total, consumed, remaining }) => {
 
 const styles = StyleSheet.create({
     container: {
-
+        flexDirection: 'row',
     },
     leftContainer: {
-
+        flex: 1,
     },
     rightContainer: {
-        
+        flex: 1,
+        justifyContent: 'center',
     },
     today: {
-
+        fontSize: 20,
+        fontWeight: '500',
+        marginBottom: 14,
     },
     rightItem: {
-
+        flexDirection: 'row',
+        marginBottom: 8,
     },
     rightItemLegend: {
-
+        flex: 1,
     },
     rightItemValue: {
-
+        flex: 1,
+        textAlign: 'right',
     }
 })
 
