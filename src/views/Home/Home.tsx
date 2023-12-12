@@ -9,15 +9,44 @@ import TodayCalories from '../../components/TodayCalories';
 import useFoodStorage from '../../hooks/useFoodStorage';
 //types
 import { Meal } from '../../types';
+import { TodayCaloriesProps } from '../../types';
+
+const totalCaloriesPerDay = 2000;
 
 const Home = () => {
 
     const { onGetTodayFood } = useFoodStorage();
     const [todayFood, setTodayFood] = useState<Meal[]>([]);
+    const [todayStatistics, setTodayStatistics] = useState<TodayCaloriesProps>({
+        consumed: 0,
+        remaining: 0,
+        percentage: 0,
+        total: 0,
+      })
+
+    const calculateTodayStatistics = (meals: Meal[]) => {
+        try {
+            const caloriesConsumed = meals.reduce((acum, curr) => acum + Number(curr.calories), 0);
+            const remainingCalories = totalCaloriesPerDay - caloriesConsumed;
+            const percentage = (caloriesConsumed / totalCaloriesPerDay) * 100;
+        
+            setTodayStatistics({
+                consumed: caloriesConsumed,
+                percentage,
+                remaining: remainingCalories,
+                total: totalCaloriesPerDay
+            })
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     const loadTodayFood = useCallback(async () => {
         try {
-            const todayFoodResponse = await onGetTodayFood();
+            const todayFoodResponse = (await onGetTodayFood()) as Meal[];
+            
+            calculateTodayStatistics(todayFoodResponse);
             setTodayFood(todayFoodResponse);
         } catch (error) {
             setTodayFood([]);
@@ -33,7 +62,7 @@ const Home = () => {
         <View style={styles.container}>
             <Header />
             <CaloriesModule />
-            <TodayCalories /> 
+            <TodayCalories {...todayStatistics}/> 
         </View>
     )
 };

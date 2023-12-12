@@ -1,15 +1,11 @@
 import React, { FC } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import CircularProgress from 'react-native-circular-progress-indicator';
+//types
+import { TodayCaloriesProps } from '../../types';
 
-type todayCaloriesProps = {
-    total: number | string;
-    consumed: number | string;
-    remaining: number | string;
-    percentage: number;
-}
 
-const TodayCalories: FC<todayCaloriesProps> = ({ total = 0, consumed = 0, remaining = 0, percentage = 0 }) => {
+const TodayCalories: FC<TodayCaloriesProps> = ({ total = 2000, consumed = 0, remaining = 0, percentage = 0 }) => {
     return(
         <View style={styles.container}>
             <View style={styles.leftContainer}>
