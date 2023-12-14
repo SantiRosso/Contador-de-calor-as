@@ -10,6 +10,7 @@ import useFoodStorage from '../../hooks/useFoodStorage';
 //types
 import { Meal } from '../../types';
 import { TodayCaloriesProps } from '../../types';
+import TodayMeals from '../../components/TodayMeals';
 
 const totalCaloriesPerDay = 2000;
 
@@ -63,6 +64,7 @@ const Home = () => {
             <Header />
             <CaloriesModule />
             <TodayCalories {...todayStatistics}/> 
+            <TodayMeals foods={todayFood}/>
         </View>
     )
 };

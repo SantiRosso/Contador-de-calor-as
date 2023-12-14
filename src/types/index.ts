@@ -16,3 +16,7 @@ export type TodayCaloriesProps = {
   remaining: number | string;
   percentage: number;
 };
+
+export type TodayMealsProps = {
+  foods: Meal[];
+};
